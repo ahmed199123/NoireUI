@@ -36,20 +36,16 @@ local function CreateWindow(utils, theme, flags, options, notificationSystem)
         utils.tween(blurEffect, 0.5, {Size = 15})
     end
 
-    -- Main Window Container
-    local mainFrame = utils.create("Frame", {
-        Name = "Main",
+    -- Wrapper for everything (handles scaling)
+    local wrapperFrame = utils.create("Frame", {
+        Name = "Wrapper",
         Size = size,
         Position = UDim2.new(0.5, -size.X.Offset/2, 0.5, -size.Y.Offset/2),
-        BackgroundColor3 = theme.Window.Background,
-        BorderSizePixel = 0,
-        ClipsDescendants = false,
+        BackgroundTransparency = 1,
         Parent = screenGui,
     })
-    utils.create("UICorner", {CornerRadius = UDim.new(0, 10), Parent = mainFrame})
-    utils.create("UIStroke", {Color = theme.Window.Border, Thickness = 1, Parent = mainFrame})
 
-    -- Drop Shadow
+    -- Drop Shadow (attached to wrapper, outside CanvasGroup)
     local shadow = utils.create("ImageLabel", {
         Name = "Shadow",
         Image = "rbxassetid://6015897843",
@@ -60,8 +56,20 @@ local function CreateWindow(utils, theme, flags, options, notificationSystem)
         ImageColor3 = theme.Window.Shadow,
         ImageTransparency = 0.4,
         ZIndex = -1,
-        Parent = mainFrame,
+        Parent = wrapperFrame,
     })
+
+    -- Main Window Container (handles transparency fading and corner clipping)
+    local mainFrame = utils.create("CanvasGroup", {
+        Name = "Main",
+        Size = UDim2.new(1, 0, 1, 0),
+        Position = UDim2.new(0, 0, 0, 0),
+        BackgroundColor3 = theme.Window.Background,
+        BorderSizePixel = 0,
+        Parent = wrapperFrame,
+    })
+    utils.create("UICorner", {CornerRadius = UDim.new(0, 10), Parent = mainFrame})
+    utils.create("UIStroke", {Color = theme.Window.Border, Thickness = 1, Parent = mainFrame})
 
     -- Top Bar (Draggable)
     local topBar = utils.create("Frame", {
@@ -93,7 +101,7 @@ local function CreateWindow(utils, theme, flags, options, notificationSystem)
     utils.createGradient(accentLine, theme.Accent.Primary, theme.Accent.Secondary, 0)
 
     -- Make window draggable
-    utils.makeDraggable(mainFrame, topBar)
+    utils.makeDraggable(wrapperFrame, topBar)
 
     -- Title Text
     local titleLbl = utils.create("TextLabel", {
@@ -199,10 +207,13 @@ local function CreateWindow(utils, theme, flags, options, notificationSystem)
     })
 
     -- Initialization animation
-    mainFrame.Size = UDim2.new(0, size.X.Offset * 0.9, 0, size.Y.Offset * 0.9)
+    wrapperFrame.Size = UDim2.new(0, size.X.Offset * 0.9, 0, size.Y.Offset * 0.9)
     mainFrame.GroupTransparency = 1
-    utils.spring(mainFrame, 0.5, {Size = size})
+    shadow.ImageTransparency = 1
+
+    utils.spring(wrapperFrame, 0.5, {Size = size})
     utils.tween(mainFrame, 0.4, {GroupTransparency = 0})
+    utils.tween(shadow, 0.4, {ImageTransparency = 0.4})
 
     -- Logic state
     local windowObj = {}
@@ -216,13 +227,15 @@ local function CreateWindow(utils, theme, flags, options, notificationSystem)
         isVisible = not isVisible
         if isVisible then
             screenGui.Enabled = true
-            utils.spring(mainFrame, 0.4, {Size = size})
+            utils.spring(wrapperFrame, 0.4, {Size = size})
             utils.tween(mainFrame, 0.3, {GroupTransparency = 0})
+            utils.tween(shadow, 0.3, {ImageTransparency = 0.4})
             if blurEffect then utils.tween(blurEffect, 0.3, {Size = 15}) end
         else
-            local t = utils.tween(mainFrame, 0.3, {
-                Size = UDim2.new(0, size.X.Offset * 0.9, 0, size.Y.Offset * 0.9),
-                GroupTransparency = 1
+            utils.tween(shadow, 0.3, {ImageTransparency = 1})
+            utils.tween(mainFrame, 0.3, {GroupTransparency = 1})
+            local t = utils.tween(wrapperFrame, 0.3, {
+                Size = UDim2.new(0, size.X.Offset * 0.9, 0, size.Y.Offset * 0.9)
             })
             if blurEffect then utils.tween(blurEffect, 0.3, {Size = 0}) end
             t.Completed:Connect(function()
@@ -240,9 +253,10 @@ local function CreateWindow(utils, theme, flags, options, notificationSystem)
     -- Close Button logic
     closeBtn.MouseButton1Click:Connect(function()
         if blurEffect then utils.tween(blurEffect, 0.4, {Size = 0}) end
-        local t = utils.tween(mainFrame, 0.4, {
-            Size = UDim2.new(0, size.X.Offset * 0.8, 0, size.Y.Offset * 0.8),
-            GroupTransparency = 1
+        utils.tween(shadow, 0.4, {ImageTransparency = 1})
+        utils.tween(mainFrame, 0.4, {GroupTransparency = 1})
+        local t = utils.tween(wrapperFrame, 0.4, {
+            Size = UDim2.new(0, size.X.Offset * 0.8, 0, size.Y.Offset * 0.8)
         })
         t.Completed:Connect(function()
             screenGui:Destroy()
