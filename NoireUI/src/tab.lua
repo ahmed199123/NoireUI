@@ -3,15 +3,15 @@
 ]]--
 
 -- Import components
-local CreateButton = loadstring(game:HttpGet("https://raw.githubusercontent.com/Asser/NoireUI/main/src/components/button.lua"))()
-local CreateToggle = loadstring(game:HttpGet("https://raw.githubusercontent.com/Asser/NoireUI/main/src/components/toggle.lua"))()
-local CreateSlider = loadstring(game:HttpGet("https://raw.githubusercontent.com/Asser/NoireUI/main/src/components/slider.lua"))()
-local CreateDropdown = loadstring(game:HttpGet("https://raw.githubusercontent.com/Asser/NoireUI/main/src/components/dropdown.lua"))()
-local CreateInput = loadstring(game:HttpGet("https://raw.githubusercontent.com/Asser/NoireUI/main/src/components/input.lua"))()
-local CreateKeybind = loadstring(game:HttpGet("https://raw.githubusercontent.com/Asser/NoireUI/main/src/components/keybind.lua"))()
-local CreateColorPicker = loadstring(game:HttpGet("https://raw.githubusercontent.com/Asser/NoireUI/main/src/components/colorpicker.lua"))()
-local CreateLabel = loadstring(game:HttpGet("https://raw.githubusercontent.com/Asser/NoireUI/main/src/components/label.lua"))()
-local CreateParagraph = loadstring(game:HttpGet("https://raw.githubusercontent.com/Asser/NoireUI/main/src/components/paragraph.lua"))()
+local CreateButton = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmed199123/NoireUI/main/NoireUI/src/components/button.lua"))()
+local CreateToggle = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmed199123/NoireUI/main/NoireUI/src/components/toggle.lua"))()
+local CreateSlider = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmed199123/NoireUI/main/NoireUI/src/components/slider.lua"))()
+local CreateDropdown = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmed199123/NoireUI/main/NoireUI/src/components/dropdown.lua"))()
+local CreateInput = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmed199123/NoireUI/main/NoireUI/src/components/input.lua"))()
+local CreateKeybind = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmed199123/NoireUI/main/NoireUI/src/components/keybind.lua"))()
+local CreateColorPicker = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmed199123/NoireUI/main/NoireUI/src/components/colorpicker.lua"))()
+local CreateLabel = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmed199123/NoireUI/main/NoireUI/src/components/label.lua"))()
+local CreateParagraph = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmed199123/NoireUI/main/NoireUI/src/components/paragraph.lua"))()
 
 local function SetupTabSystem(window, contentContainer, utils, theme, flags)
     local tabs = {}
