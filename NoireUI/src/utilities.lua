@@ -46,15 +46,19 @@ function Utilities.materialize(instance, targetSize, duration)
     
     -- Start as a 1px thin line
     instance.Size = UDim2.new(0, width, 0, 1)
-    instance.GroupTransparency = 1
     
-    -- Phase 1: Fade in as a line
-    local t1 = Utilities.tween(instance, duration * 0.3, {GroupTransparency = 0}, Enum.EasingStyle.Cubic)
+    -- Phase 1: Small expansion
+    local t1 = Utilities.tween(instance, duration * 0.3, {Size = UDim2.new(0, width, 0, 2)}, Enum.EasingStyle.Cubic)
     
     -- Phase 2: Expand vertically
     t1.Completed:Connect(function()
         Utilities.tween(instance, duration * 0.7, {Size = originalSize}, Enum.EasingStyle.Quint, Enum.EasingDirection.Out)
     end)
+end
+
+-- Spring Animation (Alias for Elastic)
+function Utilities.spring(instance, duration, properties)
+    return Utilities.tween(instance, duration, properties, Enum.EasingStyle.Elastic, Enum.EasingDirection.Out)
 end
 
 -- Staggered Tween (for lists/dropdowns)
