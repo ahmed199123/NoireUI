@@ -12,7 +12,7 @@ local NoireUI = {}
 -- Load internal modules
 -- In a real scenario these would be bundled into one file by a builder
 -- For development, we load them dynamically from the src folder
-local repo = "https://raw.githubusercontent.com/Asser/NoireUI/main/src/"
+local repo = "https://raw.githubusercontent.com/ahmed199123/NoireUI/main/NoireUI/src/"
 local function require_url(path)
     return loadstring(game:HttpGet(repo .. path))()
 end
