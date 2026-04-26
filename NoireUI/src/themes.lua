@@ -200,6 +200,44 @@ Themes.List["TOXIC"] = {
     }
 }
 
+-- ═══════════════════════════════════════
+-- PORCELAIN (Polished, Clean, Minimalist White)
+-- ═══════════════════════════════════════
+Themes.List["PORCELAIN"] = {
+    Name = "PORCELAIN",
+    Colors = {
+        L0 = Color3.fromRGB(240, 242, 245),
+        L1 = Color3.fromRGB(248, 250, 252),
+        L2 = Color3.fromRGB(255, 255, 255),
+        L3 = Color3.fromRGB(235, 238, 242),
+        L4 = Color3.fromRGB(225, 228, 234),
+        L5 = Color3.fromRGB(250, 250, 252),
+        
+        AccentPrimary = Color3.fromRGB(15, 23, 42),
+        AccentSecondary = Color3.fromRGB(51, 65, 85),
+        AccentDark = Color3.fromRGB(0, 0, 0),
+        
+        TextPrimary = Color3.fromRGB(15, 23, 42),
+        TextSecondary = Color3.fromRGB(71, 85, 105),
+        TextTertiary = Color3.fromRGB(148, 163, 184),
+        
+        BorderDark = Color3.fromRGB(203, 213, 225),
+        BorderLight = Color3.fromRGB(255, 255, 255),
+        BorderDefault = Color3.fromRGB(226, 232, 240),
+        
+        Success = Color3.fromRGB(16, 185, 129),
+        Error = Color3.fromRGB(239, 68, 68),
+        Warning = Color3.fromRGB(245, 158, 11)
+    },
+    Settings = {
+        NoiseOpacity = 0.02,
+        ScanlineOpacity = 0.01,
+        SpecularOpacity = 0.4,
+        BorderLightOpacity = 0.8,
+        BorderDarkOpacity = 0.4
+    }
+}
+
 function Themes.get(name)
     return Themes.List[name] or Themes.List["VOID"]
 end
