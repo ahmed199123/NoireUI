@@ -103,7 +103,7 @@ function NoireUI:CreateWindow(options)
     local windowObj, screenGui = CreateWindow(Utilities, themeData, self.Flags, options, nil)
     
     -- Setup Notifications
-    local notifSystem = SetupNotifications(screenGui, Utilities, themeData)
+    local notifSystem = SetupNotifications(Utilities, themeData)
     windowObj.Notify = function(_, notifOptions)
         notifSystem:Notify(notifOptions)
     end
