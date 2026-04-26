@@ -6,7 +6,7 @@ local UserInputService = game:GetService("UserInputService")
 local CoreGui = game:GetService("CoreGui")
 local TweenService = game:GetService("TweenService")
 
-local SetupTabSystem = loadstring(game:HttpGet("https://raw.githubusercontent.com/Asser/NoireUI/main/src/tab.lua"))()
+local SetupTabSystem = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmed199123/NoireUI/main/NoireUI/src/tab.lua"))()
 
 local function CreateWindow(utils, theme, flags, options, notificationSystem)
     local title = options.Title or "Noire UI"
