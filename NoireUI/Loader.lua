@@ -6,7 +6,7 @@
     local Noire = loadstring(game:HttpGet("https://raw.githubusercontent.com/Asser/NoireUI/main/Loader.lua"))()
 ]]--
 
-local url = "https://raw.githubusercontent.com/Asser/NoireUI/main/src/Source.lua"
+local url = "https://raw.githubusercontent.com/ahmed199123/NoireUI/main/NoireUI/src/Source.lua"
 
 local success, result = pcall(function()
     return loadstring(game:HttpGet(url))()
